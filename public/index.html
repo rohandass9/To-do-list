@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+    
+<link rel="stylesheet" href="style.css"></head>
+<body>
+
+<!-- sky background w clouds-->
+<div class="sky">
+<!-- create clouds-->
+ <div class="cloud cloud1"></div>
+ <div class="cloud cloud2"></div> 
+ <div class="cloud cloud3"></div>
+ <div class="cloud cloud4"></div>
+ <div class="cloud cloud5"></div> 
+ <!-- main heading -->
+ <h1 class="Time-container"></h1>
+
+ <img src="images/plane.png" alt="plane" class="plane">
+</div>
+ 
+<div class="TaskBox">
+    <div class="add-task-container">
+        <button id="toggle-add-task" class="add-button">+</button>
+        <div class="input-container hidden">
+  <input type="text" id="add-task" placeholder="What are you working on ?" />
+  <input type="date" id="add-date" />
+  <select id="add-priority">
+    <option value="High">High</option>
+    <option value="Medium" selected>Medium</option>
+    <option value="Low">Low</option>
+  </select>
+  <button id="confirm-add" class="confirm-button">+</button>
+</div>
+</div>
+  <div class="tasks-container">
+      <!-- JS will append tasks here -->
+  </div>
+</div>
+
+
+
+<script src="app.js"> </script>   
+</body>
+</html>

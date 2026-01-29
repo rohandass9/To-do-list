@@ -1,0 +1,316 @@
+/* BASE & GLOBAL STYLES */
+
+/* Reset default body margin and establish positioning context */
+body {
+    margin: 0; /* Remove default browser margin */
+    position: relative; /* Establish positioning context for absolute children */
+}
+
+/* SKY BACKGROUND */
+
+.sky {
+    position: relative; /* Positioning for clouds/plane */
+    background-color: skyblue; /* Sky color */
+    height: 50vh; /* Viewport-relative height */
+    min-height: 200px; /* Minimum height on small screens */
+    overflow: hidden; /* Clip overflowing cloud elements */
+}
+
+/* MAIN HEADER TEXT */
+
+.Time-container {
+    font-family: "poppins", sans-serif;
+    font-size: 1.2em;
+    position: absolute; /* Position relative to sky div */
+    top: 80%; /* Vertical position in sky */
+    left: 50%; /* Horizontal center */
+    transform: translate(-50%, -50%); /* Precise centering */
+    z-index: 5; /* Render above clouds */
+    text-align: center; /* Center text alignment */
+    width: 100%; /* Full container width */
+    margin: 0; /* Remove default margins */
+    color: #333; /* Dark gray for contrast */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1); /* Subtle text shadow */
+}
+
+/* CLOUD CSS */
+
+/* Base cloud styling */
+.cloud { 
+   position: absolute; /* Position within sky container */
+   margin-top: 70px; /* Cloud positioning offset */
+   width: 120px; /* Fixed cloud width */
+   height: 40px; /* Fixed cloud height */
+   background: #ECEFF1; /* Light gray cloud color */
+   box-shadow: 10px 10px rgba(0,0,0,0.2); /* Drop shadow */
+   border-radius: 100px; /* Fully rounded ends */
+}
+/* Cloud pseudo-elements create fluffy appearance */
+.cloud::after, .cloud::before {
+    content: ""; /* Required for pseudo-elements */
+    position: absolute; /* Position relative to parent cloud */
+    display: inline-block; 
+    background: inherit; /* Match parent cloud color */
+    border-radius: inherit; /* Match parent rounded corners */
+}
+/* Right-side cloud puff */
+.cloud::after {
+    width: 40px; 
+    height: 40px;
+    top: -20px; /* Position above main cloud body */
+    left: 20px; /* Offset from left */
+}
+/* Left-side cloud puff (larger) */
+.cloud::before {
+    width: 60px;
+    height: 60px;
+    top: -30px; /* Higher position */
+    left: 40px; /* Further offset */
+}
+
+/* Individual cloud positioning */
+.cloud1 { top: 7%; left: 1%; } /* Top-left position */
+.cloud2 { top: 35%; left: 15%; } /* Middle-left position */
+.cloud3 { top: 40%; left: 35%; } /* Center position */
+.cloud4 { top: 15%; left: 55%; } /* Top-right position */
+.cloud5 { top: 35%; left: 75%; } /* Middle-right position */
+
+/* PLANE CSS */
+
+.plane {
+    position: relative;
+    width: 80px; /* Fixed width */
+    height: auto; /* Maintain aspect ratio */
+    z-index: 4; /* Render between clouds and header */
+    left: 100px; /* Starting horizontal position */
+    top: 50%; /* Vertical center */
+}
+
+/* TASK CONTAINER CSS */
+
+/* Main tasks container */
+.TaskBox {
+    position: relative;
+    width: 90%;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 15px;
+    background: skyblue;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    z-index: 5;
+}
+
+/* keep button centered */
+.add-task-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* grid only for tasks */
+.tasks-container {
+    display: grid;
+    flex-direction: column;    
+    gap: 10px;
+}
+
+/* Main add button (+) */
+.add-button {
+    width: 40px; /* Fixed size */
+    height: 40px;
+    border-radius: 50%; /* Circular shape */
+    background-color: #4CAF50; /* Green color */
+    color: white;
+    border: none;
+    font-size: 1.5rem; /* Large + symbol */
+    cursor: pointer;
+    transition: all 0.3s ease; /* Smooth hover effects */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Subtle shadow */
+}
+
+.add-button:hover {
+    background-color: #45a049; /* Darker green */
+    transform: scale(1.1); /* Slight grow effect */
+}
+
+/* Input container (hidden/shown with JS) */
+.input-container {
+    display: flex;
+    flex-direction: column;
+    background: white; /* Contrast with sky */
+    border-radius: 20px; /* Rounded edges */
+    padding: 10px;
+    margin-top: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: all 0.3s ease; /* Smooth expand/collapse */
+    overflow: hidden;
+    width: 400px; /* Fixed width for better control */
+    align-items: center;
+    justify-content: left;
+}
+
+/* Hidden state for input container */
+.input-container.hidden {
+    max-height: 0;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+}
+
+/* Task input field */
+#add-task {
+    flex: 1; /* Take available space */
+    border: none;
+    outline: none; /* Remove focus outline */
+    padding: 10px;
+    border-radius: 15px 0 0 15px; /* Rounded left side */
+    font-size: 1rem;
+    width: 90%;
+}
+
+#add-date {
+    padding: 10px;
+    border: none;
+    width: 90%;
+}
+
+#add-priority {
+    padding: 10px;
+    cursor: pointer;
+    width: 90%;
+    margin-bottom: 5px;
+    border: none;
+}
+/* Confirm button (submit task) */
+.confirm-button {
+    background-color: #4CAF50; 
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 0 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%; /* full length across */
+    margin-top: 5px;
+    height: 1rem;
+}
+
+.confirm-button:hover {
+    background-color: #45a049; /* Darker hover state */
+}
+
+/* TASK ITEM CSS */
+
+/* Individual task container */
+.Box {
+    font-family: 'Courier New', Courier, monospace; /* Consistent typography */
+    background: #ffffffa0; /* Semi-transparent white */
+    margin-bottom: 10px; /* Spacing between tasks */
+    border-radius: 8px; /* Slightly rounded */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1); /* Subtle depth */
+    display: flex;
+    align-items: center; /* Vertical alignment */
+    justify-content: space-between; /* Space between text/buttons */
+    min-height: 40px; /* Minimum touch target size */
+    padding: 0; /* Remove padding from Box itself */
+}
+
+/* Hover effect for tasks */
+.Box:hover {
+    transform: translateY(-2px); 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+
+/* Task content wrapper - contains text and metadata */
+.task-content {
+    flex: 1; /* Take available space */
+    padding: 10px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+/* Task text container */
+.task-text {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #333;
+    word-wrap: break-word;
+}
+
+/* Completed task styling */
+.task-text.completed {
+    text-decoration: line-through;
+    opacity: 0.6;
+    color: #999;
+}
+
+/* Task metadata container - holds date and priority */
+.task-meta {
+    display: flex;
+    gap: 15px;
+    font-size: 0.85rem;
+    color: #666;
+    flex-wrap: wrap;
+}
+
+/* Task date and priority styling */
+.task-date, .task-priority {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.85rem;
+}
+
+/* Task action buttons container */
+.task-actions {
+    display: flex; /* Side-by-side buttons */
+    flex-shrink: 0; /* Prevent shrinking */
+}
+
+/* Shared button styles */
+.complete-btn, .remove-btn {
+    border: none;
+    padding: 0 15px; /* Horizontal padding only */
+    cursor: pointer;
+    transition: all 0.2s; /* Smooth color changes */
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 18px;
+    display: flex;
+    align-items: center; /* Vertical centering */
+    justify-content: center; /* Horizontal centering */
+    min-height: 40px; /* Match Box min-height */
+    min-width: 40px; /* Square-ish buttons */
+}
+
+/* Complete button specific styles */
+.complete-btn {
+    background: #4CAF50;
+    color: white;
+    border-top-right-radius: 0; /* Straight edge where buttons meet */
+    border-bottom-right-radius: 0;
+}
+
+/* Remove button specific styles */
+.remove-btn {
+    background: #e57373; /* Light red */
+    color: white;
+    border-top-left-radius: 0; /* Straight edge where buttons meet */
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 8px; /* Match Box border radius */
+    border-bottom-right-radius: 8px; /* Match Box border radius */
+    border-left: 1px solid rgba(255,255,255,0.3); /* Subtle divider */
+}
+
+/* Hover states */
+.complete-btn:hover {
+    background: #45a049; /* Darker green */
+}
+.remove-btn:hover {
+    background: #c62828; /* Darker red */
+}
